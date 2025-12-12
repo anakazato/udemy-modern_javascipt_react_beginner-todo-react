@@ -1,3 +1,5 @@
+import { TodoTicket } from "./TodoTicket";
+
 export const CompleteTodos = (props) => {
   const { todos, onClickBack } = props;
   return (
@@ -6,10 +8,16 @@ export const CompleteTodos = (props) => {
       <ul>
         {todos.map((todo, index) => (
           <li key={todo}>
-            <div className="list-row">
-              <p className="todo-item">{todo}</p>
-              <button onClick={() => onClickBack(index)}>戻す</button>
-            </div>
+            <TodoTicket
+              index={index}
+              todo={todo}
+              buttons={{
+                type: "completeButtons",
+                buttonFunctions: {
+                  onClickBack: onClickBack,
+                },
+              }}
+            />
           </li>
         ))}
       </ul>

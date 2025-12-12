@@ -1,3 +1,5 @@
+import { TodoTicket } from "./TodoTicket";
+
 export const IncompleteTodos = (props) => {
   const { todos, onClickComplete, onClickDelete } = props;
   return (
@@ -6,13 +8,17 @@ export const IncompleteTodos = (props) => {
       <ul>
         {todos.map((todo, index) => (
           <li key={todo}>
-            <div className="list-row">
-              <p className="todo-item">{todo}</p>
-              <button onClick={() => onClickComplete(index)}>完了</button>
-
-              {/* onClickDeleteは関数の中で動くもの、というふうにする */}
-              <button onClick={() => onClickDelete(index)}>削除</button>
-            </div>
+            <TodoTicket
+              index={index}
+              todo={todo}
+              buttons={{
+                type: "incompleteButtons",
+                buttonFunctions: {
+                  onClickComplete: onClickComplete,
+                  onClickDelete: onClickDelete,
+                },
+              }}
+            />
           </li>
         ))}
       </ul>
