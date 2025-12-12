@@ -14,11 +14,6 @@ export const Todo = () => {
     ]);
 
     const onChageTodoText = (event) => setTodoText(event.target.value);
-    const onClickDelete = (index) => {
-        const newTodos = [...incompleteTodos];
-        newTodos.splice(index, 1); // newTodos 配列から index位置から１つ削除
-        setIncompleteTodos(newTodos);
-    }
     const onClickAdd = () => {
         if(todoText === "") return;
         if(incompleteTodos.findIndex(todo => todo == todoText) != -1){
@@ -29,6 +24,24 @@ export const Todo = () => {
         setIncompleteTodos(newTodos);
         setTodoText("");
     }
+
+    const onClickDelete = (index) => {
+        const newTodos = [...incompleteTodos];
+        newTodos.splice(index, 1); // newTodos 配列から index位置から１つ削除
+        setIncompleteTodos(newTodos);
+    }
+    
+    const onClickComplete = (index) => {
+        const newIncompleteTodos = [...incompleteTodos];
+        newIncompleteTodos.splice(index, 1); // newTodos 配列から index位置から１つ削除
+        
+        const newCompleteTodos = [...completeTodos , incompleteTodos[index]];
+        
+        setIncompleteTodos(newIncompleteTodos);
+        setcompleteTodos(newCompleteTodos);
+
+    }
+    
     return (
         <>
             <div className="input-area">
@@ -45,7 +58,8 @@ export const Todo = () => {
                         <li key={todo}>
                             <div className="list-row">
                                 <p className='todo-item'>{todo}</p>
-                                <button>完了</button>
+                                <button onClick={() => onClickComplete(index)}>完了</button>
+                                
                                 {/* onClickDeleteは関数の中で動くもの、というふうにする */}
                                 <button onClick={() => onClickDelete(index)}>削除</button>
                             </div>
