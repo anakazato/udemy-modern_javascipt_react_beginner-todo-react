@@ -4,14 +4,8 @@ import { InputTodo } from "./components/InputTodo";
 
 export const Todo = () => {
   const [todoText, setTodoText] = useState("");
-  const [incompleteTodos, setIncompleteTodos] = useState([
-    "TODOです１",
-    "TODOです２",
-  ]);
-  const [completeTodos, setcompleteTodos] = useState([
-    "TODOでした１",
-    "TODOでした２",
-  ]);
+  const [incompleteTodos, setIncompleteTodos] = useState([]);
+  const [completeTodos, setcompleteTodos] = useState([]);
 
   const onChageTodoText = (event) => setTodoText(event.target.value);
   const onClickAdd = () => {
